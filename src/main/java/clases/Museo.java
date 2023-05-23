@@ -1,10 +1,10 @@
 package clases;
 
-public class museo extends elementoConNombre {
+public class Museo extends ElementoConNombre {
 	private String tema;
 	private int numSalas;
 
-	public museo(String nombre, String tema, int numSalas) {
+	public Museo(String nombre, String tema, int numSalas) {
 		super(nombre);
 		this.tema = tema;
 		this.numSalas = numSalas;

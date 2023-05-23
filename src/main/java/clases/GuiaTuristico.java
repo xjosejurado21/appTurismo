@@ -2,13 +2,13 @@ package clases;
 
 import java.util.List;
 
-public class guiaTuristico extends elementoConNombre {
+public class GuiaTuristico extends ElementoConNombre {
 
 	private List<String> idiomas;
 	private int experiencia;
 
 	// constructor
-	public guiaTuristico(String nombre, List<String> idiomas, int experiencia) {
+	public GuiaTuristico(String nombre, List<String> idiomas, int experiencia) {
 		super(nombre);
 		this.idiomas = idiomas;
 		this.experiencia = experiencia;

@@ -3,17 +3,17 @@ package clases;
 import java.util.Date;
 import java.util.List;
 
-public class viaje extends elementoConNombre {
+public class Viaje extends ElementoConNombre {
 	private String destino;
 	private Date fechaLlegada;
 	private Date fechaSalida;
 	private int numPersonas;
-	private List<servicio> listaServicios;
+	private List<Servicio> listaServicios;
 	private String tarjetaCredito;
 
 	// Constructor
-	public viaje(String nombre, String destino, Date fechaLlegada, Date fechaSalida, int numPersonas,
-			List<servicio> listaServicios, String tarjetaCredito) {
+	public Viaje(String nombre, String destino, Date fechaLlegada, Date fechaSalida, int numPersonas,
+			List<Servicio> listaServicios, String tarjetaCredito) {
 		super(nombre);
 		this.destino = destino;
 		this.fechaLlegada = fechaLlegada;
@@ -24,7 +24,7 @@ public class viaje extends elementoConNombre {
 	}
 
 	// Metodo
-	public void actualizarServicios(List<servicio> nuevosServicios) {
+	public void actualizarServicios(List<Servicio> nuevosServicios) {
 		this.listaServicios = nuevosServicios;
 	}
 
@@ -62,7 +62,7 @@ public class viaje extends elementoConNombre {
 		this.numPersonas = numPersonas;
 	}
 
-	public List<servicio> getListaServicios() {
+	public List<Servicio> getListaServicios() {
 		return listaServicios;
 	}
 

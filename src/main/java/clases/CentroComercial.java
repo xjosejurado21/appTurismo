@@ -1,11 +1,11 @@
 package clases;
 
-public class centroComercial extends elementoConNombre {
+public class CentroComercial extends ElementoConNombre {
 	private int numTiendas;
 	private int numPlantas;
 
 	// Constructor
-	public centroComercial(String nombre, int numTiendas, int numPlantas) {
+	public CentroComercial(String nombre, int numTiendas, int numPlantas) {
 		super(nombre);
 		this.numTiendas = numTiendas;
 		this.numPlantas = numPlantas;

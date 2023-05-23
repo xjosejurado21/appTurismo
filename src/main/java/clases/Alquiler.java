@@ -2,17 +2,17 @@ package clases;
 
 import java.util.List;
 
-public class alquiler extends elementoConNombre {
+public class Alquiler extends ElementoConNombre {
 	private String tipo;
 	private float precio;
-	private List<servicio> servicios;
+	private List<Servicio> Servicios;
 
 	// Constructor
-	public alquiler(String nombre, String tipo, float precio, List<servicio> servicios) {
+	public Alquiler(String nombre, String tipo, float precio, List<Servicio> Servicios) {
 		super(nombre);
 		this.tipo = tipo;
 		this.precio = precio;
-		this.servicios = servicios;
+		this.Servicios = Servicios;
 	}
 	// Getters and setters
 
@@ -32,11 +32,11 @@ public class alquiler extends elementoConNombre {
 		this.precio = precio;
 	}
 
-	public List<servicio> getServicios() {
-		return servicios;
+	public List<Servicio> getServicios() {
+		return Servicios;
 	}
 
-	public void setServicios(List<servicio> servicios) {
-		this.servicios = servicios;
+	public void setServicios(List<Servicio> Servicios) {
+		this.Servicios = Servicios;
 	}
 }

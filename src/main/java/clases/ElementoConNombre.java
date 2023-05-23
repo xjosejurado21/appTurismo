@@ -1,11 +1,11 @@
 package clases;
 
-public class elementoConNombre {
+public class ElementoConNombre {
 	// Atributos
 	private String nombre;
 
 	// Constructor
-	public elementoConNombre(String nombre) {
+	public ElementoConNombre(String nombre) {
 		this.nombre = nombre;
 	}
 

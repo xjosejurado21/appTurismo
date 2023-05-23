@@ -32,13 +32,13 @@ public class principal {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
-        // Image
+        // Imagen
         JPanel imagePanel = new JPanel();
         ImageIcon image = new ImageIcon("path-to-image.jpg"); // Change this to your image path
         JLabel imageLabel = new JLabel(image);
         imagePanel.add(imageLabel);
 
-        // Login/Registration
+        // Login/Registro
         JPanel loginPanel = new JPanel();
         JTextField userField = new JTextField(20);
         JPasswordField passwordField = new JPasswordField(20);
@@ -60,7 +60,7 @@ public class principal {
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setVisible(true);
 
-        // Add event listeners to buttons
+       
         loginButton.addActionListener(e -> {
             if (registeredUser == null || registeredPassword == null) {
                 JOptionPane.showMessageDialog(loginFrame, "Por favor, regístrese primero.");
@@ -70,7 +70,7 @@ public class principal {
             } else {
                 JOptionPane.showMessageDialog(loginFrame, "Usuario o contraseña incorrecta. Por favor, intente de nuevo.");
             }
-            // Clear fields
+            // limpiar archivos
             userField.setText("");
             passwordField.setText("");
         });
@@ -83,7 +83,7 @@ public class principal {
                 registeredPassword = new String(passwordField.getPassword());
                 JOptionPane.showMessageDialog(loginFrame, "Registro exitoso. Ahora puede iniciar sesión.");
             }
-            // Clear fields
+            // limpiar contenido
             userField.setText("");
             passwordField.setText("");
         });
@@ -98,15 +98,15 @@ class MainPage extends JFrame {
 
         JPanel mainPanel = new JPanel();
 
-        // Add elements depending on user type
+        // añade elemento depende del tipo
         if ("unregistered".equals(userType)) {
-            // Display services
+            // Mostrar servicios 
             mainPanel.add(new JLabel("Mostrar servicios aquí"));
         } else if ("user".equals(userType)) {
-            // Display and edit reservations
+            //Mostrar y editar reservas
             mainPanel.add(new JLabel("Mostrar y editar reservas aquí"));
         } else if ("admin".equals(userType)) {
-            // Administer users
+            // administrar usuarios
             mainPanel.add(new JLabel("Administrar usuarios aquí"));
         }
 

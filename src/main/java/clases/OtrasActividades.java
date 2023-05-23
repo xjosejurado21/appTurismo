@@ -2,13 +2,13 @@ package clases;
 
 import java.util.Date;
 
-public class otrasActividades extends elementoConNombre {
+public class OtrasActividades extends ElementoConNombre {
 	private String descripcion;
 	private Date fechaInicio;
 	private Date fechaSalida;
 
 	//Cosntructor
-	public otrasActividades(String nombre, String descripcion, Date fechaInicio, Date fechaSalida) {
+	public OtrasActividades(String nombre, String descripcion, Date fechaInicio, Date fechaSalida) {
 		super(nombre);
 		this.descripcion = descripcion;
 		this.fechaInicio = fechaInicio;

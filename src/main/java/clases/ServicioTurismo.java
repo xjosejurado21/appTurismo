@@ -1,6 +1,6 @@
 package clases;
 
-public class servicioTurismo extends elementoConNombre {
+public class ServicioTurismo extends ElementoConNombre {
 
 	private String direccion;
 	private String horario;
@@ -9,7 +9,7 @@ public class servicioTurismo extends elementoConNombre {
 	private String contacto;
 
 	// Constructor
-	public servicioTurismo(String nombre, String direccion, String horario, String categoria, String imagen,
+	public ServicioTurismo(String nombre, String direccion, String horario, String categoria, String imagen,
 			String contacto) {
 		super(nombre);
 		this.direccion = direccion;

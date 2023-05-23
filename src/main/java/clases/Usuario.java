@@ -1,7 +1,7 @@
 package clases;
 
 //Clase usuario
-public class usuario extends elementoConNombre {
+public class Usuario extends ElementoConNombre {
 	// Atributos
 	private int id;
 	private String email;
@@ -9,7 +9,7 @@ public class usuario extends elementoConNombre {
 	private String contrasena;
 
 	// Constructor
-	public usuario(String nombre, int id, String nombreUsuario, String email, boolean isAdmin, String contrasena) {
+	public Usuario(String nombre, int id, String nombreUsuario, String email, boolean isAdmin, String contrasena) {
 		super(nombre);
 		this.id = id;
 		nombre = nombreUsuario;

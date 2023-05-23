@@ -2,14 +2,14 @@ package clases;
 
 import java.util.HashSet;
 
-public abstract class servicio extends elementoConNombre {
+public abstract class Servicio extends ElementoConNombre {
 	private int id;
 	private String descripcion;
 	private float precio;
-	private HashSet<servicio> reservasActivas; // Asumiendo que existe una clase Reserva
+	private HashSet<Servicio> reservasActivas; // Asumiendo que existe una clase Reserva
 
 	// Constructor
-	public servicio(String nombre, int id, String descripcion, float precio, HashSet<servicio> reservasActivas) {
+	public Servicio(String nombre, int id, String descripcion, float precio, HashSet<Servicio> reservasActivas) {
 		super(nombre);
 		this.id = id;
 		this.descripcion = descripcion;
@@ -19,15 +19,15 @@ public abstract class servicio extends elementoConNombre {
 
 	// Metodos
 
-	public void crearReserva(servicio reserva) {
+	public void crearReserva(Servicio reserva) {
 		this.reservasActivas.add(reserva);
 	}
 
-	public void anularReserva(servicio reserva) {
+	public void anularReserva(Servicio reserva) {
 		this.reservasActivas.remove(reserva);
 	}
 
-	public void modificarReserva(servicio antiguaReserva, servicio nuevaReserva) {
+	public void modificarReserva(Servicio antiguaReserva, Servicio nuevaReserva) {
 		this.reservasActivas.remove(antiguaReserva);
 		this.reservasActivas.add(nuevaReserva);
 	}
@@ -46,7 +46,7 @@ public abstract class servicio extends elementoConNombre {
 		return precio;
 	}
 
-	public HashSet<servicio> getReservasActivas() {
+	public HashSet<Servicio> getReservasActivas() {
 		return reservasActivas;
 	}
 }

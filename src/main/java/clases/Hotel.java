@@ -1,10 +1,10 @@
 package clases;
 
-public class hotel extends elementoConNombre {
+public class Hotel extends ElementoConNombre {
 	private int estrellas;
 
 	// Constructor
-	public hotel(String nombre, int estrellas) {
+	public Hotel(String nombre, int estrellas) {
 		super(nombre);
 		this.estrellas = estrellas;
 	}

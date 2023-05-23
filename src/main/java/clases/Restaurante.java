@@ -1,11 +1,11 @@
 package clases;
 
-public class restaurante extends elementoConNombre {
+public class Restaurante extends ElementoConNombre {
 	private String tipoComida;
 	private int mesas;
 
 	// Constructor
-	public restaurante(String nombre, String tipoComida, int mesas) {
+	public Restaurante(String nombre, String tipoComida, int mesas) {
 		super(nombre);
 		this.tipoComida = tipoComida;
 		this.mesas = mesas;

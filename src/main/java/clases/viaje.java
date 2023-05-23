@@ -3,14 +3,15 @@ package clases;
 import java.util.Date;
 import java.util.List;
 
-public class viaje extends elementoConNombre{
+public class viaje extends elementoConNombre {
 	private String destino;
 	private Date fechaLlegada;
 	private Date fechaSalida;
 	private int numPersonas;
 	private List<servicio> listaServicios;
 	private String tarjetaCredito;
-	
+
+	// Constructor
 	public viaje(String nombre, String destino, Date fechaLlegada, Date fechaSalida, int numPersonas,
 			List<servicio> listaServicios, String tarjetaCredito) {
 		super(nombre);
@@ -22,7 +23,7 @@ public class viaje extends elementoConNombre{
 		this.tarjetaCredito = tarjetaCredito;
 	}
 
-	//Metodo
+	// Metodo
 	public void actualizarServicios(List<servicio> nuevosServicios) {
 		this.listaServicios = nuevosServicios;
 	}

@@ -3,16 +3,17 @@ package clases;
 import java.util.Date;
 import java.util.List;
 
-public class viaje {
+public class viaje extends elementoConNombre{
 	private String destino;
 	private Date fechaLlegada;
 	private Date fechaSalida;
 	private int numPersonas;
 	private List<servicio> listaServicios;
 	private String tarjetaCredito;
-
-	public viaje(String destino, Date fechaLlegada, Date fechaSalida, int numPersonas, List<servicio> listaServicios,
-			String tarjetaCredito) {
+	
+	public viaje(String nombre, String destino, Date fechaLlegada, Date fechaSalida, int numPersonas,
+			List<servicio> listaServicios, String tarjetaCredito) {
+		super(nombre);
 		this.destino = destino;
 		this.fechaLlegada = fechaLlegada;
 		this.fechaSalida = fechaSalida;

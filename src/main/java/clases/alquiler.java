@@ -2,20 +2,21 @@ package clases;
 
 import java.util.List;
 
-public class alquiler {
+public class alquiler extends elementoConNombre {
     private String tipo;
     private float precio;
     private List<servicio> servicios; 
 
-    public alquiler(String tipo, float precio, List<servicio> servicios) {
-        this.tipo = tipo;
-        this.precio = precio;
-        this.servicios = servicios;
-    }
-
+    //Constructor
+    public alquiler(String nombre, String tipo, float precio, List<servicio> servicios) {
+		super(nombre);
+		this.tipo = tipo;
+		this.precio = precio;
+		this.servicios = servicios;
+	}
     // Getters and setters
 
-    public String getTipo() {
+	public String getTipo() {
         return tipo;
     }
 

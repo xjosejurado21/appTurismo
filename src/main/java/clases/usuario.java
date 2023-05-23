@@ -4,7 +4,6 @@ package clases;
 public class usuario extends elementoConNombre{
     // Atributos
     private int id;
-    private String nombre;
     private String email;
     private boolean isAdmin;
     private String contrasena;
@@ -50,14 +49,6 @@ public class usuario extends elementoConNombre{
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public String getEmail() {

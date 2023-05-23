@@ -1,5 +1,5 @@
 package clases;
 
-public class guiaTuristico  {
+public class guiaTuristico extends elementoConNombre {
 	
 }

@@ -4,9 +4,9 @@ import java.sql.*;
 
 import excepciones.ConexionFallidaException;
 
-public class DatabaseConnector {
+public class DataBaseConnector {
 	//Creamos las variables privadas con los respectivos valores para conectarnos a la base de datos.
-	    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/tiempoextrabd";
+	    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/proyectoprogramación";
 	    private static final String DATABASE_USER = "root";
 	    private static final String DATABASE_PASSWORD = "";
 	//Aqui creamos una excepcion propia la cual llamamos ConexionFallidaException

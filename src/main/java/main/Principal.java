@@ -19,83 +19,121 @@ import java.util.Map;
 import javax.swing.*;
 import java.awt.*;
 
+
+import javax.swing.*;
+import java.awt.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.sql.*;
+
 public class Principal {
 
-    private static String registeredUser = null;
-    private static String registeredPassword = null;
+    private static Connection connection;
 
     public static void main(String[] args) {
-        
-        JFrame loginFrame = new JFrame("Bienvenido");
-        loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        try {
+            // Conexión con la base de datos
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectoprogramación", "root", "");
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
+            // Crea el JFrame
+            JFrame loginFrame = new JFrame("Inicio de sesión/Registro");
+            loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Imagen
-        JPanel imagePanel = new JPanel();
-        ImageIcon image = new ImageIcon("path-to-image.jpg"); // Change this to your image path
-        JLabel imageLabel = new JLabel(image);
-        imagePanel.add(imageLabel);
+            // Crea el JPanel
+            JPanel panel = new JPanel();
+            panel.setLayout(new BorderLayout());
 
-        // Login/Registro
-        JPanel loginPanel = new JPanel();
-        JTextField userField = new JTextField(20);
-        JPasswordField passwordField = new JPasswordField(20);
-        JButton loginButton = new JButton("Iniciar sesión");
-        JButton registerButton = new JButton("Registro");
+            // Imagen
+            ImageIcon imageIcon = new ImageIcon("path-to-your-image"); // Reemplaza con el path de tu imagen
+            JLabel imageLabel = new JLabel(imageIcon);
+            panel.add(imageLabel, BorderLayout.CENTER);
 
-        loginPanel.add(new JLabel("Usuario:"));
-        loginPanel.add(userField);
-        loginPanel.add(new JLabel("Contraseña:"));
-        loginPanel.add(passwordField);
-        loginPanel.add(loginButton);
-        loginPanel.add(registerButton);
+            // Campos de texto y botones
+            JTextField userField = new JTextField(20);
+            JPasswordField passwordField = new JPasswordField(20);
+            JButton loginButton = new JButton("Iniciar sesión");
+            JButton registerButton = new JButton("Registro");
 
-        mainPanel.add(imagePanel, BorderLayout.CENTER);
-        mainPanel.add(loginPanel, BorderLayout.SOUTH);
+            // Panel para los campos de texto y botones
+            JPanel inputPanel = new JPanel();
+            inputPanel.add(new JLabel("Usuario:"));
+            inputPanel.add(userField);
+            inputPanel.add(new JLabel("Contraseña:"));
+            inputPanel.add(passwordField);
+            inputPanel.add(loginButton);
+            inputPanel.add(registerButton);
+            panel.add(inputPanel, BorderLayout.SOUTH);
 
-        loginFrame.add(mainPanel);
-        loginFrame.setSize(800, 600);
-        loginFrame.setLocationRelativeTo(null);
-        loginFrame.setVisible(true);
+            // Añade el panel al frame
+            loginFrame.add(panel);
+            loginFrame.setSize(800, 600);
+            loginFrame.setLocationRelativeTo(null);
+            loginFrame.setVisible(true);
 
-       
-        loginButton.addActionListener(e -> {
-            if (registeredUser == null || registeredPassword == null) {
-                JOptionPane.showMessageDialog(loginFrame, "Por favor, regístrese primero.");
-            } else if (userField.getText().equals(registeredUser) && new String(passwordField.getPassword()).equals(registeredPassword)) {
-                loginFrame.dispose();
-                new main("user");
-            } else {
-                JOptionPane.showMessageDialog(loginFrame, "Usuario o contraseña incorrecta. Por favor, intente de nuevo.");
-            }
-            // limpiar archivos
-            userField.setText("");
-            passwordField.setText("");
-        });
+            // Acción para el botón de inicio de sesión
+            loginButton.addActionListener(e -> {
+                try {
+                    PreparedStatement ps = connection.prepareStatement("SELECT * FROM Usuario WHERE Nombre = ? AND Contraseña = ?");
+                    ps.setString(1, userField.getText());
+                    ps.setString(2, new String(passwordField.getPassword()));
+                    ResultSet rs = ps.executeQuery();
 
-        registerButton.addActionListener(e -> {
-            if (userField.getText().isEmpty() || passwordField.getPassword().length == 0) {
-                JOptionPane.showMessageDialog(loginFrame, "Ambos campos deben estar llenos para registrarse.");
-            } else {
-                registeredUser = userField.getText();
-                registeredPassword = new String(passwordField.getPassword());
-                JOptionPane.showMessageDialog(loginFrame, "Registro exitoso. Ahora puede iniciar sesión.");
-            }
-            // limpiar contenido
-            userField.setText("");
-            passwordField.setText("");
-        });
-        
-        
-        
-        
-        
-        
+                    if (rs.next()) {
+                        // Cierra la ventana de inicio de sesión/registro
+                        loginFrame.dispose();
+
+                        // Abre la página principal
+                        new MainPage(rs.getString("Nombre"));
+                    } else {
+                        JOptionPane.showMessageDialog(loginFrame, "Usuario o contraseña incorrecta. Por favor, intenta de nuevo.");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+                // Limpia los campos de texto
+                userField.setText("");
+                passwordField.setText("");
+            });
+
+            // Acción para el botón de registro
+            registerButton.addActionListener(e -> {
+                try {
+                    PreparedStatement ps = connection.prepareStatement("INSERT INTO Usuario (Nombre, Contraseña) VALUES (?, ?)");
+                    ps.setString(1, userField.getText());
+                    ps.setString(2, new String(passwordField.getPassword()));
+                    ps.executeUpdate();
+
+                    JOptionPane.showMessageDialog(loginFrame, "Registro exitoso. Ahora puedes iniciar sesión.");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+                // Limpia los campos de texto
+                userField.setText("");
+                passwordField.setText("");
+            });
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
-
-
-
+    
+    
+    
+    
 }
 
+// Aquí necesitarás implementar la clase MainPage
+class MainPage extends JFrame {
+    public MainPage(String user) {
+        super("Página principal");
+
+        // Aquí puedes agregar el contenido de la página principal.
+
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+}

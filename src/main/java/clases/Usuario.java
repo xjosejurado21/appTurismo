@@ -1,12 +1,19 @@
 package clases;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import excepciones.ConexionFallidaException;
+import jbdc.DataBaseConnector;
+
 //Clase usuario
 public class Usuario extends ElementoConNombre {
 	// Atributos
 	private int id;
 	private String email;
 	private boolean isAdmin;
-	private String contrasena;
+	private String contraseña;
 
 	// Constructor
 	public Usuario(String nombre, int id, String nombreUsuario, String email, boolean isAdmin, String contrasena) {
@@ -15,28 +22,53 @@ public class Usuario extends ElementoConNombre {
 		nombre = nombreUsuario;
 		this.email = email;
 		this.isAdmin = isAdmin;
-		this.contrasena = contrasena;
+		this.contraseña = contrasena;
 	}
 
 	// Metodos
-	public void crear_usuario() {
-		// Implementar la lógica para crear un usuario
+	public void crear_usuario() throws ConexionFallidaException {
+		
+		
+		
+		    String sql = "INSERT INTO Usuario (Id, Nombre, Contraseña, Email, isAdmin) VALUES (?, ?, ?, ?, ?)";
+
+		    try (Connection conn = DataBaseConnector.getConnection();
+		         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+		        pstmt.setInt(1, this.id);
+		        pstmt.setString(2, this.getNombre());
+		        pstmt.setString(3, this.contraseña);
+		        pstmt.setString(4, this.email);
+		        pstmt.setBoolean(5, this.isAdmin);
+
+		        pstmt.executeUpdate();
+
+		    } catch (SQLException e) {
+		        System.out.println(e.getMessage());
+		    }
 	}
 
-	public void eliminar_usuario() {
-		// Implementar la lógica para eliminar un usuario
-	}
+	public void crear_contraseña() throws ConexionFallidaException {
+		
+		    String sql = "UPDATE Usuario SET Contraseña = ? WHERE Id = ?";
 
-	public void crear_contrasena() {
-		// Implementar la lógica para crear una contraseña
-	}
+		    try (Connection conn = DataBaseConnector.getConnection();
+		         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-	public void modificar_contrasena() {
-		// Implementar la lógica para modificar una contraseña
-	}
+		        pstmt.setString(1, this.contraseña);
+		        pstmt.setInt(2, this.id);
 
-	public void modificar_nombre() {
-		// Implementar la lógica para modificar el nombre
+		        pstmt.executeUpdate();
+
+		    } catch (SQLException e) {
+		        System.out.println(e.getMessage());
+		    
+		}
+
+
+		
+		
+		
 	}
 
 	public void crear_valoracion() {
@@ -69,10 +101,10 @@ public class Usuario extends ElementoConNombre {
 	}
 
 	public String getContrasena() {
-		return contrasena;
+		return contraseña;
 	}
 
 	public void setContrasena(String contrasena) {
-		this.contrasena = contrasena;
+		this.contraseña = contrasena;
 	}
 }

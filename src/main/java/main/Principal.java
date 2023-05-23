@@ -19,7 +19,7 @@ import java.util.Map;
 import javax.swing.*;
 import java.awt.*;
 
-public class principal {
+public class Principal {
 
     private static String registeredUser = null;
     private static String registeredPassword = null;
@@ -66,7 +66,7 @@ public class principal {
                 JOptionPane.showMessageDialog(loginFrame, "Por favor, regístrese primero.");
             } else if (userField.getText().equals(registeredUser) && new String(passwordField.getPassword()).equals(registeredPassword)) {
                 loginFrame.dispose();
-                new MainPage("user");
+                new main("user");
             } else {
                 JOptionPane.showMessageDialog(loginFrame, "Usuario o contraseña incorrecta. Por favor, intente de nuevo.");
             }
@@ -87,32 +87,15 @@ public class principal {
             userField.setText("");
             passwordField.setText("");
         });
+        
+        
+        
+        
+        
+        
     }
+
+
+
 }
 
-class MainPage extends JFrame {
-
-    public MainPage(String userType) {
-        super("Página Principal");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel mainPanel = new JPanel();
-
-        // añade elemento depende del tipo
-        if ("unregistered".equals(userType)) {
-            // Mostrar servicios 
-            mainPanel.add(new JLabel("Mostrar servicios aquí"));
-        } else if ("user".equals(userType)) {
-            //Mostrar y editar reservas
-            mainPanel.add(new JLabel("Mostrar y editar reservas aquí"));
-        } else if ("admin".equals(userType)) {
-            // administrar usuarios
-            mainPanel.add(new JLabel("Administrar usuarios aquí"));
-        }
-
-        add(mainPanel);
-        setSize(800, 600);
-        setLocationRelativeTo(null);
-        setVisible(true);
-    }
-}

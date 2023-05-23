@@ -9,7 +9,6 @@ public class restaurante extends elementoConNombre {
         this.tipoComida = tipoComida;
         this.mesas = mesas;
     }
-
     // Getters and setters
 
     public String getTipoComida() {

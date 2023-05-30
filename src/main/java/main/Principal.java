@@ -78,6 +78,16 @@ public class Principal {
 			// Crea el JPanel
 			JPanel panel = new JPanel();
 			panel.setLayout(new BorderLayout());
+			
+			// Añade la imagen al panel
+            ImageIcon icon = new ImageIcon("turismo.jpg");
+            JLabel label = new JLabel();
+            label.setIcon(icon);
+            panel.add(label, BorderLayout.CENTER);
+			
+			
+			
+			
 
 			// Campos de texto y botones
 			JTextField userField = new JTextField(20);

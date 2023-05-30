@@ -63,13 +63,7 @@ public class Usuario extends ElementoConNombre {
 		        System.out.println(e.getMessage());
 		    
 		}
-
-
-		
-		
-		
 	}
-
 
 	// Getters y setters
 	public int getId() {

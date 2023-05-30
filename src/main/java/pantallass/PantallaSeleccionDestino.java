@@ -27,14 +27,16 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 
 //Aquí necesitarás implementar la clase PantallaSeleccionDestino
-public class  PantallaSeleccionDestino extends JFrame {
-	private Connection connection;
+public class PantallaSeleccionDestino extends JFrame {
+    private Connection connection;
+    private JLabel lblImagen;
+    private JComboBox<String> comboDestino;
 
-	public PantallaSeleccionDestino(Usuario user,Connection connection) {
-     super("Página principal");
-     this.connection = connection;
-     getContentPane().setLayout(new BorderLayout(0, 0));
-     
+    public PantallaSeleccionDestino(Usuario user, Connection connection) {
+        super("Página principal");
+        this.connection = connection;
+        getContentPane().setLayout(new BorderLayout(0, 0));
+        
      JPanel panel = new JPanel();
      getContentPane().add(panel, BorderLayout.CENTER);
      GridBagLayout gbl_panel = new GridBagLayout();
@@ -83,15 +85,21 @@ public class  PantallaSeleccionDestino extends JFrame {
      comboFecha.addItem("Enero");
      comboFecha.addItem("Febrero");
      comboFecha.addItem("Marzo");
-     
+     comboFecha.addItem("Abril");
+     comboFecha.addItem("Mayo");
+     comboFecha.addItem("Junio");
+     comboFecha.addItem("Julio");
+     comboFecha.addItem("Agosto");
+     comboFecha.addItem("Septiembre");
+     comboFecha.addItem("Octubre");
+     comboFecha.addItem("Noviembre");
+     comboFecha.addItem("Diciembre");
      
      setSize(800, 600);
      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
      setLocationRelativeTo(null);
      setVisible(true);
      getContentPane().add(panel);
-     
-     
      BufferedImage myPicture;
 	try {
 		myPicture = ImageIO.read(new File("C:\\Users\\imjos\\Downloads\\malaga.jpg"));
@@ -109,8 +117,14 @@ public class  PantallaSeleccionDestino extends JFrame {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-     
- 
+	
+	
+	
+	
+
+	
+	
+	
      
      JLabel lblDescripcionCiudad = new JLabel("New label");
      GridBagConstraints gbc_lblDescripcionCiudad = new GridBagConstraints();
@@ -119,10 +133,5 @@ public class  PantallaSeleccionDestino extends JFrame {
      gbc_lblDescripcionCiudad.gridx = 1;
      gbc_lblDescripcionCiudad.gridy = 4;
      panel.add(lblDescripcionCiudad, gbc_lblDescripcionCiudad);
-     
-     
-   
-     
-     
  }
 }

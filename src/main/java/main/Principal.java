@@ -55,6 +55,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.sql.*;
 
 import javax.swing.*;
@@ -65,6 +66,8 @@ public class Principal {
 	private static Connection connection;
 
 	public static void main(String[] args) {
+
+		
 		try {
 			// Conexión con la base de datos
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectoprogramación", "root", "");
@@ -79,7 +82,9 @@ public class Principal {
 			panel.setLayout(new BorderLayout());
 			
 			// Añade la imagen al panel
-            ImageIcon icon = new ImageIcon("principal.jpg");
+			
+			
+            ImageIcon icon = new ImageIcon("src\\main\\java\\recursos\\Destinos\\principal.jpg");
             JLabel label = new JLabel();
             label.setIcon(icon);
             panel.add(label, BorderLayout.CENTER);
@@ -108,7 +113,9 @@ public class Principal {
 
 			// Acción para el botón de inicio de sesión
 			loginButton.addActionListener(e -> {
-				try {
+				/*try {
+					
+					
 					PreparedStatement ps = connection
 							.prepareStatement("SELECT * FROM usuario WHERE nombre = ? AND contrasenia = ?");
 					ps.setString(1, userField.getText());
@@ -127,7 +134,8 @@ public class Principal {
 						
 						// Abre la página principal
 						Usuario user = new Usuario(nombre, id, email, false, contrasenia);
-						new PantallaSeleccionDestino(user, connection);
+						connection.close();
+						new PantallaSeleccionDestino(user);
 						
 					} else {
 						JOptionPane.showMessageDialog(loginFrame,
@@ -135,7 +143,17 @@ public class Principal {
 					}
 				} catch (SQLException ex) {
 					ex.printStackTrace();
-				}
+				}*/
+				
+				
+				Usuario user = new Usuario("mau", 2, "mail", false, "123");
+				 				try {
+									connection.close();
+								} catch (SQLException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+				new PantallaSeleccionDestino(user);
 
 				// Limpia los campos de texto
 				userField.setText("");
@@ -207,6 +225,7 @@ public class Principal {
 		} catch (ConexionFallidaException ex) {
 			ex.printStackTrace();
 		}
+	
 	}
 }
 

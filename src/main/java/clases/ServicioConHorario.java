@@ -1,10 +1,13 @@
 package clases;
 
-public class ServicioConHorario extends ElementoConNombre{
+public class ServicioConHorario extends Servicio{
+	
+
 	private String horario;
 
-	public ServicioConHorario(String nombre, String horario) {
-		super(nombre);
+	public ServicioConHorario(String nombre, int id, String descripcion, String url, String direccion, String ciudad,
+			String horario) {
+		super(nombre, id, descripcion, url, direccion, ciudad);
 		this.horario = horario;
 	}
 
@@ -15,5 +18,10 @@ public class ServicioConHorario extends ElementoConNombre{
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
-
+	
+	
+	
+	
+	
+	
 }

@@ -3,50 +3,57 @@ package clases;
 import java.util.HashSet;
 
 public abstract class Servicio extends ElementoConNombre {
+	
 	private int id;
 	private String descripcion;
-	private float precio;
-	private HashSet<Servicio> reservasActivas; // Asumiendo que existe una clase Reserva
-
-	// Constructor
-	public Servicio(String nombre, int id, String descripcion, float precio, HashSet<Servicio> reservasActivas) {
+	private String url;
+	private String direccion;
+	private String ciudad;
+	
+	//Constructor
+	public Servicio(String nombre, int id, String descripcion, String url, String direccion, String ciudad) {
 		super(nombre);
 		this.id = id;
 		this.descripcion = descripcion;
-		this.precio = precio;
-		this.reservasActivas = reservasActivas;
+		this.url = url;
+		this.direccion = direccion;
+		this.ciudad = ciudad;
 	}
-
-	// Metodos
-
-	public void crearReserva(Servicio reserva) {
-		this.reservasActivas.add(reserva);
-	}
-
-	public void anularReserva(Servicio reserva) {
-		this.reservasActivas.remove(reserva);
-	}
-
-	public void modificarReserva(Servicio antiguaReserva, Servicio nuevaReserva) {
-		this.reservasActivas.remove(antiguaReserva);
-		this.reservasActivas.add(nuevaReserva);
-	}
-
-	// Getters and setters
-
+	//Getters y setters
 	public int getId() {
 		return id;
 	}
-
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getDescripcion() {
 		return descripcion;
 	}
-
-	public float getPrecio() {
-		return precio;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
-
-	public HashSet<Servicio> getReservasActivas() {
-		return reservasActivas;
+	public String getUrl() {
+		return url;
 	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getDireccion() {
+		return direccion;
+	}
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+	public String getCiudad() {
+		return ciudad;
+	}
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+	
+	
+	
+	
+	
+	
 }

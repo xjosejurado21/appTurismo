@@ -1,30 +1,25 @@
 package clases;
 
-public class Museo extends ElementoConNombre {
-	private String tema;
-	private int numSalas;
+import enums.TipoMuseo;
 
-	public Museo(String nombre, String tema, int numSalas) {
-		super(nombre);
-		this.tema = tema;
-		this.numSalas = numSalas;
+public class Museo extends ServicioConPrecio {
+
+	private TipoMuseo tipo;
+
+	public Museo(String nombre, int id, String descripcion, String url, String direccion, String ciudad, String horario,
+			int precio, TipoMuseo tipo) {
+		super(nombre, id, descripcion, url, direccion, ciudad, horario, precio);
+		this.tipo = tipo;
 	}
 
-	// Getters and setters
-
-	public String getTema() {
-		return tema;
+	public TipoMuseo getTipo() {
+		return tipo;
 	}
 
-	public void setTema(String tema) {
-		this.tema = tema;
+	public void setTipo(TipoMuseo tipo) {
+		this.tipo = tipo;
 	}
-
-	public int getNumSalas() {
-		return numSalas;
-	}
-
-	public void setNumSalas(int numSalas) {
-		this.numSalas = numSalas;
-	}
+	
 }
+
+	

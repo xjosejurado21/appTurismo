@@ -2,42 +2,12 @@ package clases;
 
 import java.util.Date;
 
-public class Otros extends ElementoConNombre {
-	private String descripcion;
-	private Date fechaInicio;
-	private Date fechaSalida;
-
+public class Otros extends ServicioConPrecio {
+	
 	//Cosntructor
-	public Otros(String nombre, String descripcion, Date fechaInicio, Date fechaSalida) {
-		super(nombre);
-		this.descripcion = descripcion;
-		this.fechaInicio = fechaInicio;
-		this.fechaSalida = fechaSalida;
-	}
-
-	// Getters and setters
-
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-	public Date getFechaInicio() {
-		return fechaInicio;
-	}
-
-	public void setFechaInicio(Date fechaInicio) {
-		this.fechaInicio = fechaInicio;
-	}
-
-	public Date getFechaSalida() {
-		return fechaSalida;
-	}
-
-	public void setFechaSalida(Date fechaSalida) {
-		this.fechaSalida = fechaSalida;
+	public Otros(String nombre, int id, String descripcion, String url, String direccion, String ciudad, String horario,
+			int precio) {
+		super(nombre, id, descripcion, url, direccion, ciudad, horario, precio);
+		// TODO Auto-generated constructor stub
 	}
 }

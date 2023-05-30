@@ -80,7 +80,7 @@ public class Principal {
 			panel.setLayout(new BorderLayout());
 			
 			// Añade la imagen al panel
-            ImageIcon icon = new ImageIcon("turismo.jpg");
+            ImageIcon icon = new ImageIcon("principal.jpg");
             JLabel label = new JLabel();
             label.setIcon(icon);
             panel.add(label, BorderLayout.CENTER);

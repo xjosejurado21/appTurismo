@@ -19,6 +19,8 @@ import clases.Usuario;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -68,10 +70,50 @@ public class PantallaSeleccionDestino extends JFrame {
      gbc_comboDestino.gridy = 2;
      panel.add(comboDestino, gbc_comboDestino);
      
+     //Items
      comboDestino.addItem("Málaga");
      comboDestino.addItem("Madrid");
      comboDestino.addItem("Vigo");
      comboDestino.addItem("Cádiz");
+
+    //Acción
+     comboDestino.addItemListener(new ItemListener() {
+         public void itemStateChanged(ItemEvent event) {
+             if (event.getStateChange() == ItemEvent.SELECTED) {
+                 Object item = event.getItem();
+                 String selectedCity = item.toString();
+
+                 String imagePath = "";
+
+                 switch(selectedCity) {
+                     case "Málaga":
+                         imagePath = "C:\\Users\\imjos\\Downloads\\malaga.jpg";
+                         break;
+                     case "Madrid":
+                         imagePath = "C:\\Users\\imjos\\Downloads\\madrid.jpg";
+                         break;
+                     case "Vigo":
+                         imagePath = "C:\\Users\\imjos\\Downloads\\vigo.jpg";
+                         break;
+                     case "Cádiz":
+                         imagePath = "C:\\Users\\imjos\\Downloads\\cadiz.jpg";
+                         break;
+                 }
+
+                 BufferedImage myPicture;
+                 try {
+                     myPicture = ImageIO.read(new File(imagePath));
+                     myPicture.getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
+                     lblImagen.setIcon(new ImageIcon(myPicture));
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 }
+             }
+         }
+     });
+     
+     
+     
      
      
      JComboBox comboFecha = new JComboBox();
@@ -117,14 +159,6 @@ public class PantallaSeleccionDestino extends JFrame {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
-	
-	
-	
-
-	
-	
-	
      
      JLabel lblDescripcionCiudad = new JLabel("New label");
      GridBagConstraints gbc_lblDescripcionCiudad = new GridBagConstraints();

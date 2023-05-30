@@ -70,7 +70,6 @@ public class Principal {
 			//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectoprogramación", "root", "");
 			connection = DataBaseConnector.getConnection();
 			
-			
 			// Crea el JFrame
 			JFrame loginFrame = new JFrame("Inicio de sesión/Registro");
 			loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -85,10 +84,6 @@ public class Principal {
             label.setIcon(icon);
             panel.add(label, BorderLayout.CENTER);
 			
-			
-			
-			
-
 			// Campos de texto y botones
 			JTextField userField = new JTextField(20);
 			JPasswordField passwordField = new JPasswordField(20);

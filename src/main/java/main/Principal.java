@@ -1,6 +1,12 @@
 package main;
 
 import javax.swing.*;
+
+import clases.Usuario;
+import excepciones.ConexionFallidaException;
+import jbdc.DataBaseConnector;
+import pantallass.PantallaSeleccionDestino;
+
 import java.awt.*;
 
 import javax.swing.*;
@@ -51,7 +57,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 
-import java.sql.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -62,8 +67,10 @@ public class Principal {
 	public static void main(String[] args) {
 		try {
 			// Conexión con la base de datos
-			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectoprogramación", "root", "");
-
+			//connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/proyectoprogramación", "root", "");
+			connection = DataBaseConnector.getConnection();
+			
+			
 			// Crea el JFrame
 			JFrame loginFrame = new JFrame("Inicio de sesión/Registro");
 			loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -98,7 +105,7 @@ public class Principal {
 			loginButton.addActionListener(e -> {
 				try {
 					PreparedStatement ps = connection
-							.prepareStatement("SELECT * FROM Usuario WHERE Nombre = ? AND Contraseña = ?");
+							.prepareStatement("SELECT * FROM usuario WHERE nombre = ? AND contrasenia = ?");
 					ps.setString(1, userField.getText());
 					ps.setString(2, new String(passwordField.getPassword()));
 					ResultSet rs = ps.executeQuery();
@@ -107,8 +114,16 @@ public class Principal {
 						// Cierra la ventana de inicio de sesión/registro
 						loginFrame.dispose();
 
+						
+						int id = rs.getInt("id");
+						String nombre = rs.getString("nombre");
+						String email= rs.getString("email");
+						String contrasenia= rs.getString("contrasenia");
+						
 						// Abre la página principal
-						new MainPage(rs.getString("Nombre"), connection);
+						Usuario user = new Usuario(nombre, id, email, false, contrasenia);
+						new PantallaSeleccionDestino(user, connection);
+						
 					} else {
 						JOptionPane.showMessageDialog(loginFrame,
 								"Usuario o contraseña incorrecta. Por favor, intenta de nuevo.");
@@ -151,7 +166,7 @@ public class Principal {
 					try {
 						// Comprueba si el correo electrónico ya existe en la base de datos
 						PreparedStatement checkEmail = connection
-								.prepareStatement("SELECT * FROM Usuario WHERE Email = ?");
+								.prepareStatement("SELECT * FROM Usuario WHERE email = ?");
 						checkEmail.setString(1, registerEmailField.getText());
 						ResultSet rs = checkEmail.executeQuery();
 
@@ -163,7 +178,7 @@ public class Principal {
 							// Si el correo electrónico no existe, inserta el nuevo usuario en la base de
 							// datos
 							PreparedStatement ps = connection.prepareStatement(
-									"INSERT INTO Usuario (Nombre, Contraseña, Email, isAdmin) VALUES (?, ?, ?, ?)");
+									"INSERT INTO Usuario (nombre, contrasenia, email, isBusiness) VALUES (?, ?, ?, ?)");
 							ps.setString(1, registerUserField.getText());
 							ps.setString(2, new String(registerPasswordField.getPassword()));
 							ps.setString(3, registerEmailField.getText());
@@ -184,98 +199,10 @@ public class Principal {
 					registerEmailField.setText("");
 				});
 			});
-		} catch (SQLException ex) {
+		} catch (ConexionFallidaException ex) {
 			ex.printStackTrace();
 		}
 	}
 }
 
-// Aquí necesitarás implementar la clase MainPage
-class MainPage extends JFrame {
-	private Connection connection;
 
-	public MainPage(String user,Connection connection) {
-        super("Página principal");
-        this.connection = connection;
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        JButton viajeButton = new JButton("Viaje");
-        panel.add(viajeButton, BorderLayout.CENTER);
-
-        viajeButton.addActionListener(e -> {
-            JFrame viajeFrame = new JFrame("Viaje");
-            viajeFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-            JPanel viajePanel = new JPanel();
-            JTextField numPersonasField = new JTextField(20);
-            JTextField tarjetaCreditoField = new JTextField(20);
-            JTextField destinoField = new JTextField(20);
-            JButton confirmButton = new JButton("Añadir");
-            JButton cancelButton = new JButton("Cancelar");
-            JButton serviciosButton = new JButton("Servicios adicionales");
-
-            viajePanel.add(new JLabel("Número de personas:"));
-            viajePanel.add(numPersonasField);
-            viajePanel.add(new JLabel("Tarjeta de crédito:"));
-            viajePanel.add(tarjetaCreditoField);
-            viajePanel.add(new JLabel("Destino:"));
-            viajePanel.add(destinoField);
-            viajePanel.add(confirmButton);
-            viajePanel.add(cancelButton);
-            viajePanel.add(serviciosButton);
-
-            viajeFrame.add(viajePanel);
-            viajeFrame.setSize(400, 300);
-            viajeFrame.setLocationRelativeTo(null);
-            viajeFrame.setVisible(true);
-
-            confirmButton.addActionListener(ev -> {
-                try {
-                    PreparedStatement ps = connection.prepareStatement("INSERT INTO Viaje (num_personas, Tarjeta_credito, Destino, usuario) VALUES (?, ?, ?, ?)");
-                    ps.setInt(1, Integer.parseInt(numPersonasField.getText()));
-                    ps.setString(2, tarjetaCreditoField.getText());
-                    ps.setString(3, destinoField.getText());
-                    ps.setString(4, user);
-                    ps.executeUpdate();
-                    JOptionPane.showMessageDialog(viajeFrame, "Viaje añadido con éxito.");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            });
-
-            cancelButton.addActionListener(ev -> {
-                numPersonasField.setText("");
-                tarjetaCreditoField.setText("");
-                destinoField.setText("");
-                JOptionPane.showMessageDialog(viajeFrame, "Operación cancelada.");
-            });
-            serviciosButton.addActionListener(ev -> {
-                JFrame serviciosFrame = new JFrame("Servicios adicionales");
-                serviciosFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-                JPanel serviciosPanel = new JPanel();
-                JCheckBox alquilerCochesCheckBox = new JCheckBox("Alquiler de coches");
-                JCheckBox alquilerMotosCheckBox = new JCheckBox("Alquiler de motos");
-                JCheckBox alquilerBicicletasCheckBox = new JCheckBox("Alquiler de bicicletas");
-                JCheckBox alquilerPatinesCheckBox = new JCheckBox("Alquiler de patines eléctricos");
-
-                serviciosPanel.add(alquilerCochesCheckBox);
-                serviciosPanel.add(alquilerMotosCheckBox);
-                serviciosPanel.add(alquilerBicicletasCheckBox);
-                serviciosPanel.add(alquilerPatinesCheckBox);
-
-                serviciosFrame.add(serviciosPanel);
-                serviciosFrame.setSize(400, 200);
-                serviciosFrame.setLocationRelativeTo(null);
-                serviciosFrame.setVisible(true);
-            });
-        });
-
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        add(panel);
-    }
-}

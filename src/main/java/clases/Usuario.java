@@ -12,17 +12,16 @@ public class Usuario extends ElementoConNombre {
 	// Atributos
 	private int id;
 	private String email;
-	private boolean isAdmin;
-	private String contraseña;
+	private boolean isBusiness;
+	private String contrasenia;
 
 	// Constructor
-	public Usuario(String nombre, int id, String nombreUsuario, String email, boolean isAdmin, String contrasena) {
+	public Usuario(String nombre, int id, String email, boolean isBusiness, String contrasenia) {
 		super(nombre);
 		this.id = id;
-		nombre = nombreUsuario;
 		this.email = email;
-		this.isAdmin = isAdmin;
-		this.contraseña = contrasena;
+		this.isBusiness = isBusiness;
+		this.contrasenia = contrasenia;
 	}
 
 	// Metodos
@@ -30,16 +29,16 @@ public class Usuario extends ElementoConNombre {
 		
 		
 		
-		    String sql = "INSERT INTO Usuario (Id, Nombre, Contraseña, Email, isAdmin) VALUES (?, ?, ?, ?, ?)";
+		    String sql = "INSERT INTO usuario (id, nombre, contrasenia, email, isBusiness) VALUES (?, ?, ?, ?, ?)";
 
 		    try (Connection conn = DataBaseConnector.getConnection();
 		         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 		        pstmt.setInt(1, this.id);
 		        pstmt.setString(2, this.getNombre());
-		        pstmt.setString(3, this.contraseña);
+		        pstmt.setString(3, this.contrasenia);
 		        pstmt.setString(4, this.email);
-		        pstmt.setBoolean(5, this.isAdmin);
+		        pstmt.setBoolean(5, this.isBusiness);
 
 		        pstmt.executeUpdate();
 
@@ -48,14 +47,14 @@ public class Usuario extends ElementoConNombre {
 		    }
 	}
 
-	public void crear_contraseña() throws ConexionFallidaException {
+	public void crear_contrasenia() throws ConexionFallidaException {
 		
-		    String sql = "UPDATE Usuario SET Contraseña = ? WHERE Id = ?";
+		    String sql = "UPDATE usuario SET contrasenia = ? WHERE id = ?";
 
 		    try (Connection conn = DataBaseConnector.getConnection();
 		         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-		        pstmt.setString(1, this.contraseña);
+		        pstmt.setString(1, this.contrasenia);
 		        pstmt.setInt(2, this.id);
 
 		        pstmt.executeUpdate();
@@ -71,9 +70,6 @@ public class Usuario extends ElementoConNombre {
 		
 	}
 
-	public void crear_valoracion() {
-		// Implementar la lógica para crear una valoración
-	}
 
 	// Getters y setters
 	public int getId() {
@@ -92,19 +88,19 @@ public class Usuario extends ElementoConNombre {
 		this.email = email;
 	}
 
-	public boolean getIsAdmin() {
-		return isAdmin;
+	public boolean getisBusiness() {
+		return isBusiness;
 	}
 
-	public void setIsAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setisBusiness(boolean isBusiness) {
+		this.isBusiness = isBusiness;
 	}
 
-	public String getContrasena() {
-		return contraseña;
+	public String getContrasenia() {
+		return contrasenia;
 	}
 
-	public void setContrasena(String contrasena) {
-		this.contraseña = contrasena;
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
 	}
 }

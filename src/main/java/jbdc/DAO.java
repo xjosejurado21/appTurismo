@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import clases.CentroComercial;
 import clases.Destino;
 import clases.Hotel;
 import clases.Museo;
+import clases.Restaurante;
 import enums.TipoMuseo;
 import excepciones.ConexionFallidaException;
 
@@ -52,7 +54,7 @@ public class DAO {
 		conexion = DataBaseConnector.getConnection();
 		
 		Statement stmt = conexion.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM museo WHERE ciudad = "+ciudad);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM museo WHERE ciudad = '"+ciudad+"'");
         
         ArrayList<Museo> museos = new ArrayList<Museo>();
         
@@ -102,12 +104,14 @@ public class DAO {
 	
 	
 	
-public static ArrayList<Hotel> hotelesPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+	/*POR REVISAR*/
+	
+	public static ArrayList<Hotel> hotelesPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
 		
 		conexion = DataBaseConnector.getConnection();
 		
 		Statement stmt = conexion.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM hotel WHERE ciudad = "+ciudad);
+        ResultSet rs = stmt.executeQuery("SELECT * FROM hotel WHERE ciudad = '"+ciudad+"'");
         
         ArrayList<Hotel> hoteles = new ArrayList<Hotel>();
         
@@ -116,13 +120,11 @@ public static ArrayList<Hotel> hotelesPorCiudad(String ciudad) throws SQLExcepti
             int id = rs.getInt("id");
             String nombre= rs.getString("nombre");
             String descripcion = rs.getString("descripcion");
-            int precio = rs.getInt("precio");
             String horario = rs.getString("horario");
             String direccion = rs.getString("direccion");
             String url = rs.getString("url");
-            String tipo = rs.getString("tipo");
-      
-            
+            int num_tiendas = rs.getInt("num_tiendas");
+            int num_pisos = rs.getInt("num_pisos");
        
             
             Hotel hotel =null;
@@ -138,6 +140,92 @@ public static ArrayList<Hotel> hotelesPorCiudad(String ciudad) throws SQLExcepti
 		
 		
 	}
+	
+	
+	
+	public static ArrayList<CentroComercial> centroComercialPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+		
+		conexion = DataBaseConnector.getConnection();
+		
+		Statement stmt = conexion.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM centro_comercial WHERE ciudad = '"+ciudad+"'");
+        
+        ArrayList<CentroComercial> centrosComerciales = new ArrayList<CentroComercial>();
+        
+        
+        while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String nombre= rs.getString("nombre");
+            String descripcion = rs.getString("descripcion");
+            String horario = rs.getString("horario");
+            String direccion = rs.getString("direccion");
+            String url = rs.getString("url");
+            int numTiendas = rs.getInt("num_tiendas");
+            int numPisos = rs.getInt("num_pisos");
+       
+            
+            CentroComercial centro = new CentroComercial(
+            		nombre, id, descripcion, url, direccion, ciudad, horario, numTiendas, numPisos
+            		);
+            
+            //Hotel hotel = new Hotel(nombre, id, descripcion, url, direccion, ciudad, horario, precio);
+           centrosComerciales.add(centro);
+            
+            
+        }
+        
+        conexion.close();
+		
+		return centrosComerciales;
+		
+		
+	}
+	
+	
+public static ArrayList<Restaurante> RestaurantePorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+		
+		conexion = DataBaseConnector.getConnection();
+		
+		Statement stmt = conexion.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM centro_comercial WHERE ciudad = '"+ciudad+"'");
+        
+        ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
+        
+        
+        while ( rs.next() ) {
+            int id = rs.getInt("id");
+            String nombre= rs.getString("nombre");
+            String descripcion = rs.getString("descripcion");
+            String horario = rs.getString("horario");
+            String direccion = rs.getString("direccion");
+            int rangoPrecio= rs.getInt("rango_precio");
+            String url = rs.getString("url");
+            
+   
+            Restaurante restaurante= new Restaurante(
+            		nombre, id, descripcion, url, direccion, ciudad, horario,1
+            		);
+            
+            //Hotel hotel = new Hotel(nombre, id, descripcion, url, direccion, ciudad, horario, precio);
+           restaurantes.add(restaurante);
+        }
+        
+        conexion.close();
+		
+		return restaurantes;
+		
+	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

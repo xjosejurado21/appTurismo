@@ -2,13 +2,13 @@ package clases;
 
 public class CentroComercial extends ServicioConHorario {
 	private int numTiendas;
-	private int numPlantas;
+	private int numPisos;
 	// Constructor
 	public CentroComercial(String nombre, int id, String descripcion, String url, String direccion, String ciudad,
-			String horario, int numTiendas, int numPlantas) {
+			String horario, int numTiendas, int numPisos) {
 		super(nombre, id, descripcion, url, direccion, ciudad, horario);
 		this.numTiendas = numTiendas;
-		this.numPlantas = numPlantas;
+		this.numPisos = numPisos;
 	}
 	public int getNumTiendas() {
 		return numTiendas;
@@ -16,24 +16,11 @@ public class CentroComercial extends ServicioConHorario {
 	public void setNumTiendas(int numTiendas) {
 		this.numTiendas = numTiendas;
 	}
-	public int getNumPlantas() {
-		return numPlantas;
+	public int getNumPisos() {
+		return numPisos;
 	}
-	public void setNumPlantas(int numPlantas) {
-		this.numPlantas = numPlantas;
+	public void setNumPisos(int numPisos) {
+		this.numPisos = numPisos;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

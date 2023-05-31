@@ -233,7 +233,6 @@ private Ventana ventana;
 		panelBotones.add(btnEvento);
 		
 		
-		
 		//Esta por concretar
 		JButton btnTours = new JButton("Tours");
 		panelBotones.add(btnTours);

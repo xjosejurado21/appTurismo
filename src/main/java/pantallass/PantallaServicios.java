@@ -238,11 +238,6 @@ private Ventana ventana;
 		JButton btnTours = new JButton("Tours");
 		panelBotones.add(btnTours);
 		
-		
-		
-		
-		
-		
 	}
 	
 }

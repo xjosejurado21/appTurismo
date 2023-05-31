@@ -187,7 +187,7 @@ public static ArrayList<Restaurante> RestaurantePorCiudad(String ciudad) throws 
 		conexion = DataBaseConnector.getConnection();
 		
 		Statement stmt = conexion.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT * FROM centro_comercial WHERE ciudad = '"+ciudad+"'");
+        ResultSet rs = stmt.executeQuery("SELECT * FROM restaurante WHERE ciudad = '"+ciudad+"'");
         
         ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
         

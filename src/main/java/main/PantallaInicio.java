@@ -1,6 +1,8 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,20 +38,34 @@ private Ventana ventana;
 			connection = DataBaseConnector.getConnection();
 			
 			// Crea el JFrame
-			/*JFrame loginFrame = new JFrame("Inicio de sesión/Registro");
-			loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);*/
+			JFrame loginFrame = new JFrame("Inicio de sesión/Registro");
+			loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 			// Crea el JPanel
 		
 			setLayout(new BorderLayout());
 			
+			
+			
+			
+	
+
 			// Añade la imagen al panel
-			
-			
-            ImageIcon icon = new ImageIcon("src\\main\\java\\recursos\\Destinos\\principal.jpg");
-            JLabel label = new JLabel();
-            label.setIcon(icon);
-            add(label, BorderLayout.CENTER);
+
+			ImageIcon icon = new ImageIcon("src\\main\\java\\recursos\\Destinos\\Logo.jpg");
+			Image image = icon.getImage(); // transformarlo
+
+			JLabel label = new JLabel() {
+			    @Override
+			    protected void paintComponent(Graphics g) {
+			        super.paintComponent(g);
+			        g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+			    }
+			};
+
+			add(label, BorderLayout.CENTER);
+
+
 			
 			// Campos de texto y botones
 			JTextField userField = new JTextField(20);
@@ -75,7 +91,7 @@ private Ventana ventana;
 
 			// Acción para el botón de inicio de sesión
 			loginButton.addActionListener(e -> {
-				/*try {
+				try {
 					
 					
 					PreparedStatement ps = connection
@@ -96,8 +112,12 @@ private Ventana ventana;
 						
 						// Abre la página principal
 						Usuario user = new Usuario(nombre, id, email, false, contrasenia);
+						 v.setUsuario(user);
+						 v.irAPantallaSeleccionDestino();
+						 
+						 
 						connection.close();
-						new PantallaSeleccionDestino(user);
+						
 						
 					} else {
 						JOptionPane.showMessageDialog(loginFrame,
@@ -105,22 +125,21 @@ private Ventana ventana;
 					}
 				} catch (SQLException ex) {
 					ex.printStackTrace();
-				}*/
+				}
 				
 				
-				Usuario user = new Usuario("mau", 2, "mail", false, "123");
+				/*Usuario user = new Usuario("jose", 2, "mail", false, "123");
 				 				try {
 									connection.close();
 								} catch (SQLException e1) {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
-								}
+								}*/
 				 				
 				 
 				 				
-				 v.setUsuario(user);
-				 v.irAPantallaSeleccionDestino();
-				//new PantallaSeleccionDestino(user);
+				
+				
 
 				// Limpia los campos de texto
 				userField.setText("");

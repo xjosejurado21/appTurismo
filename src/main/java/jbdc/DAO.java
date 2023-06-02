@@ -184,7 +184,7 @@ public class DAO {
 	}
 	
 	
-public static ArrayList<Servicio> RestaurantePorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+public static ArrayList<Servicio> restaurantePorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
 		
 		conexion = DataBaseConnector.getConnection();
 		
@@ -204,9 +204,7 @@ public static ArrayList<Servicio> RestaurantePorCiudad(String ciudad) throws SQL
             String url = rs.getString("url");
             
    
-            Restaurante restaurante= new Restaurante(
-            		nombre, id, descripcion, url, direccion, ciudad, horario,1
-            		);
+            Restaurante restaurante= new Restaurante(nombre, id, descripcion, url, direccion, ciudad, horario,rangoPrecio);
             
             //Hotel hotel = new Hotel(nombre, id, descripcion, url, direccion, ciudad, horario, precio);
            restaurantes.add(restaurante);

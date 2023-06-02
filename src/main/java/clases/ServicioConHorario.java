@@ -18,6 +18,11 @@ public class ServicioConHorario extends Servicio{
 	public void setHorario(String horario) {
 		this.horario = horario;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+ "Horario=" + horario;
+	}
 	
 	
 	

@@ -23,6 +23,7 @@ import excepciones.ConexionFallidaException;
 import jbdc.DAO;
 
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
@@ -56,7 +57,7 @@ public class PantallaSeleccionDestino extends JPanel {
      GridBagLayout gbl_panel = new GridBagLayout();
      gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0};
      gbl_panel.rowHeights = new int[]{0, 0, 0, 200, 100, 0, 0};
-     gbl_panel.columnWeights = new double[]{1.0, 1.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
+     gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
      gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
      setLayout(gbl_panel);
      
@@ -66,13 +67,6 @@ public class PantallaSeleccionDestino extends JPanel {
      gbc_lblInfoDestino.gridx = 1;
      gbc_lblInfoDestino.gridy = 1;
      add(lblInfoDestino, gbc_lblInfoDestino);
-     
-     JLabel lblInfoFecha = new JLabel("Seleccione un mes:");
-     GridBagConstraints gbc_lblInfoFecha = new GridBagConstraints();
-     gbc_lblInfoFecha.insets = new Insets(0, 0, 5, 5);
-     gbc_lblInfoFecha.gridx = 3;
-     gbc_lblInfoFecha.gridy = 1;
-     add(lblInfoFecha, gbc_lblInfoFecha);
      
      JComboBox<String> comboDestino = new JComboBox<String>();
      GridBagConstraints gbc_comboDestino = new GridBagConstraints();
@@ -94,7 +88,7 @@ public class PantallaSeleccionDestino extends JPanel {
  	 
  	 
  	  JLabel lblDescripcionCiudad = new JLabel("New label");
- 	  lblDescripcionCiudad.setMinimumSize(new Dimension(500,300));
+ 	  lblDescripcionCiudad.setMinimumSize(new Dimension(500,200));
       GridBagConstraints gbc_lblDescripcionCiudad = new GridBagConstraints();
       gbc_lblDescripcionCiudad.gridwidth = 3;
       gbc_lblDescripcionCiudad.insets = new Insets(0, 0, 5, 5);
@@ -133,6 +127,8 @@ public class PantallaSeleccionDestino extends JPanel {
                     		 try {
 	                    		 //Cargar descripcion
 	                    		 String texto= "<html>"+destinos.get(i).getDescripcion()+"</html>";
+	                    		 
+	                    		 
 	                    		 lblDescripcionCiudad.setText(texto);
 	                    		 
 	                    		 
@@ -141,7 +137,7 @@ public class PantallaSeleccionDestino extends JPanel {
 	                    		 BufferedImage myPicture;
                             	 File file = new File("src\\main\\java\\recursos\\Destinos\\"+nombreArchivo);
                                  myPicture = ImageIO.read(file);
-                                 myPicture.getScaledInstance(200, 200,0);
+                                 myPicture.getScaledInstance(200, 200,Image.SCALE_SMOOTH);
                                  lblImagen.setIcon(new ImageIcon(myPicture));
                                  
                                  //Seleccióin destino
@@ -166,37 +162,6 @@ public class PantallaSeleccionDestino extends JPanel {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
 	}
-    
-     
-     
-     
-
-    
-     
-     
-     
-     
-     
-     JComboBox comboFecha = new JComboBox();
-     GridBagConstraints gbc_comboFecha = new GridBagConstraints();
-     gbc_comboFecha.insets = new Insets(0, 0, 5, 5);
-     gbc_comboFecha.fill = GridBagConstraints.HORIZONTAL;
-     gbc_comboFecha.gridx = 3;
-     gbc_comboFecha.gridy = 2;
-     add(comboFecha, gbc_comboFecha);
-     
-     comboFecha.addItem("Enero");
-     comboFecha.addItem("Febrero");
-     comboFecha.addItem("Marzo");
-     comboFecha.addItem("Abril");
-     comboFecha.addItem("Mayo");
-     comboFecha.addItem("Junio");
-     comboFecha.addItem("Julio");
-     comboFecha.addItem("Agosto");
-     comboFecha.addItem("Septiembre");
-     comboFecha.addItem("Octubre");
-     comboFecha.addItem("Noviembre");
-     comboFecha.addItem("Diciembre");
      
      
      
@@ -204,11 +169,7 @@ public class PantallaSeleccionDestino extends JPanel {
      
      
      
-     
-     
-     
-      
-  
+ 
 
   // Asegúrate de cambiar el booleano anterior cuando el destino es seleccionado en tu aplicación.
 

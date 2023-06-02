@@ -19,6 +19,20 @@ public class Museo extends ServicioConPrecio {
 	public void setTipo(TipoMuseo tipo) {
 		this.tipo = tipo;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+ "tipo=" + tipo;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

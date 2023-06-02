@@ -17,6 +17,11 @@ public class ServicioConPrecio extends ServicioConHorario {
 	public void setPrecio(int precio) {
 		this.precio = precio;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"Precio=" + precio;
+	}
 	
 	
 	

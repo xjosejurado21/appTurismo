@@ -31,6 +31,11 @@ public class Evento extends ServicioConPrecio {
 		this.artista = artista;
 	}
 
+	@Override
+	public String toString() {
+		return super.toString()+ "Fecha=" + fecha + ", artista=" + artista;
+	}
+
 	
 
 	

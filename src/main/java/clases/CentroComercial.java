@@ -22,5 +22,11 @@ public class CentroComercial extends ServicioConHorario {
 	public void setNumPisos(int numPisos) {
 		this.numPisos = numPisos;
 	}
+	@Override
+	public String toString() {
+		return super.toString()+ "NumTiendas=" + numTiendas + ", numPisos=" + numPisos + "]";
+	}
+	
+	
 	
 }

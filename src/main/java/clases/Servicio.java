@@ -60,4 +60,17 @@ public abstract class Servicio extends ElementoConNombre {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+
+	@Override
+	public String toString() {
+		return super.toString()+"Descripcion=" + descripcion + ", url=" + url + ", direccion=" + direccion
+				+ ", ciudad=" + ciudad;
+	}
+
+	
+	
+	
+	
+	
+	
 }

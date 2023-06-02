@@ -15,4 +15,13 @@ public class Restaurante extends ServicioConHorario {
 	public void setRangoPrecio(int rangoPrecio) {
 		this.rangoPrecio = rangoPrecio;
 	}
+	@Override
+	public String toString() {
+		return super.toString()+ "RangoPrecio=" + rangoPrecio+"\n\n\n\n";
+	}
+	
+	
+	
+	
+	
 }

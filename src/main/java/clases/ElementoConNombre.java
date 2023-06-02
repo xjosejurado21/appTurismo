@@ -17,5 +17,11 @@ public class ElementoConNombre {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	// ToString
+
+	@Override
+	public String toString() {
+		return "Nombre=" + nombre;
+	}
+	
+	
 }

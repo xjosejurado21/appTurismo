@@ -77,7 +77,7 @@ public class PantallaServicios extends JPanel{
 		gbc_btnHome.gridy = 0;
 		panelContenido.add(btnHome, gbc_btnHome);
 		
-		JLabel lblSeccion = new JLabel("New label");
+		JLabel lblSeccion = new JLabel("");
 		lblSeccion.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSeccion.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblSeccion = new GridBagConstraints();
@@ -186,6 +186,8 @@ public class PantallaServicios extends JPanel{
 		});
 		panelBotones.add(btnMuseo);
 		
+		
+		
 		JButton btnCentroComercial = new JButton("Centro Comercial");
 		btnCentroComercial.addMouseListener(new MouseAdapter() {
 			@Override
@@ -246,7 +248,7 @@ public class PantallaServicios extends JPanel{
 				try {
 					
 					lblSeccion.setText("Restaurantes");
-					 servicios = DAO.RestaurantePorCiudad(v.getDestinoSeleccionado().getNombre());
+					 servicios = DAO.restaurantePorCiudad(v.getDestinoSeleccionado().getNombre());
 					
 					
 					DefaultListModel<String> model = new DefaultListModel<String>();
@@ -331,7 +333,7 @@ public class PantallaServicios extends JPanel{
 		});
 		panelBotones.add(btnEvento);
 		
-		
+	
 	}
 	
 }

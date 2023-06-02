@@ -70,7 +70,6 @@ public class Principal extends JPanel{
 		Ventana v = new Ventana();
 	}
 		
-		
 	
 	}
 

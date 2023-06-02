@@ -26,20 +26,19 @@ public class Ventana extends JFrame{
 	
 
 
-
-
 	public Ventana() {
 		
 		setBackground(Color.WHITE);
-		/*setIconImage(Toolkit.getDefaultToolkit().getImage(
-				"C:\\Users\\panch\\Documents\\PROGRAMACI\u00D3N\\MauroPernas-WarInCenec\\imagenes\\blood-icon.png"));*/
+		
+		//PARA LOGO
+		//setIconImage(Toolkit.getDefaultToolkit().getImage(""));
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1000, 800);
 		setTitle("AppTurismo");
 		
 		setVisible(true);
-		//this.setResizable(false);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 
 		this.pantallaInicio = new PantallaInicio(this);

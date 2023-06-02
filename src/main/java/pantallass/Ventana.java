@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 
 import clases.Destino;
+import clases.Servicio;
 import clases.Usuario;
 import main.PantallaInicio;
 import main.Principal;
@@ -17,6 +18,7 @@ public class Ventana extends JFrame{
 	private PantallaInicio pantallaInicio;
 	private PantallaSeleccionDestino pantallaSeleccionDestino;
 	private PantallaServicios pantallaServicios;
+	private PantallaDetalle pantallaDetalle;
 	private Usuario usuario;
 	private Destino destinoSeleccionado;
 	
@@ -68,6 +70,11 @@ public class Ventana extends JFrame{
 			this.pantallaInicio = null;
 		}
 		
+		if(this.pantallaServicios!=null) {
+			this.pantallaServicios.setVisible(false);
+			this.pantallaServicios = null;
+		}
+		
 		
 		this.setContentPane(pantallaSeleccionDestino);
 		this.pantallaSeleccionDestino.setVisible(true);
@@ -91,13 +98,37 @@ public class Ventana extends JFrame{
 			this.pantallaSeleccionDestino = null;
 		}
 		
+		if(this.pantallaDetalle!=null) {
+			this.pantallaDetalle.setVisible(false);
+			this.pantallaDetalle = null;
+		}
+		
 		
 		this.setContentPane(pantallaServicios);
 		this.pantallaServicios.setVisible(true);
 	}
 	
 
+	public void irAPantallaDetalle(Servicio servicio) {
 
+		//Crea nueva pantalla
+		if (this.pantallaDetalle == null) {
+			this.pantallaDetalle = new PantallaDetalle(this, servicio);
+
+		}
+		
+		
+		
+		//Elimina pantallas anteriores
+		if(this.pantallaServicios!=null) {
+			this.pantallaServicios.setVisible(false);
+			this.pantallaServicios = null;
+		}
+		
+		
+		this.setContentPane(pantallaDetalle);
+		this.pantallaDetalle.setVisible(true);
+	}
 
 	
 

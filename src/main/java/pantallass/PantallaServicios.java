@@ -3,8 +3,10 @@ package pantallass;
 import javax.swing.JPanel;
 
 import clases.CentroComercial;
+import clases.Evento;
 import clases.Museo;
 import clases.Restaurante;
+import clases.Servicio;
 import excepciones.ConexionFallidaException;
 import jbdc.DAO;
 
@@ -26,10 +28,11 @@ import java.awt.Font;
 import javax.swing.ListSelectionModel;
 import java.awt.Dimension;
 import java.awt.Color;
+import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class PantallaServicios extends JPanel{
-	
-	
 	/*
 	 * BASE PARA CREAR UNA PANTALLA NUEVA
 	 * 
@@ -37,35 +40,74 @@ public class PantallaServicios extends JPanel{
 	
 	public PantallaServicios(Ventana v) {
 		this.ventana = v;
-		
-		
-		
-		
-		
 	}*/
 	
+	private Ventana ventana;
 	
-	
-private Ventana ventana;
-	
+	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+
+
 	public PantallaServicios(Ventana v) {
 		this.ventana = v;
 		setLayout(new BorderLayout(0, 0));
 		
 		
+		
 		JPanel panelContenido = new JPanel();
 		GridBagLayout gbl_panelContenido = new GridBagLayout();
-		gbl_panelContenido.columnWidths = new int[]{70, 0, 70, 0};
-		gbl_panelContenido.rowHeights = new int[]{0, 0, 0, 0};
-		gbl_panelContenido.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_panelContenido.rowWeights = new double[]{0.0, 1.0, 1.0, Double.MIN_VALUE};
+		gbl_panelContenido.columnWidths = new int[]{0, 70, 0, 70, 0};
+		gbl_panelContenido.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gbl_panelContenido.columnWeights = new double[]{0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_panelContenido.rowWeights = new double[]{0.0, 0.0, 1.0, 1.0, Double.MIN_VALUE};
 		panelContenido.setLayout(gbl_panelContenido);
 		
 		add(panelContenido, BorderLayout.CENTER);
 		
+		JButton btnHome = new JButton("Inicio");
+		btnHome.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				v.irAPantallaSeleccionDestino();
+			}
+		});
+		GridBagConstraints gbc_btnHome = new GridBagConstraints();
+		gbc_btnHome.insets = new Insets(0, 0, 5, 5);
+		gbc_btnHome.gridx = 1;
+		gbc_btnHome.gridy = 0;
+		panelContenido.add(btnHome, gbc_btnHome);
+		
+		JLabel lblSeccion = new JLabel("New label");
+		lblSeccion.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSeccion.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblSeccion = new GridBagConstraints();
+		gbc_lblSeccion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSeccion.gridx = 2;
+		gbc_lblSeccion.gridy = 1;
+		panelContenido.add(lblSeccion, gbc_lblSeccion);
+		
 		JList<String> list = new JList<String>();
 		list.setFixedCellHeight(100);
 		list.setBackground(Color.WHITE);
+		
+		
+		
+		
+		list.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+	                  
+					Servicio s = servicios.get(list.getSelectedIndex());
+						v.irAPantallaDetalle(s);
+					
+					
+	                }
+			}
+			
+		});
+		
 		
 		
 		list.setMinimumSize(new Dimension(0, 50));
@@ -75,9 +117,12 @@ private Ventana ventana;
 		GridBagConstraints gbc_list = new GridBagConstraints();
 		gbc_list.insets = new Insets(0, 0, 5, 5);
 		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 1;
-		gbc_list.gridy = 1;
+		gbc_list.gridx = 2;
+		gbc_list.gridy = 2;
 		panelContenido.add(list, gbc_list);
+		
+	
+		
 		
 		
 		JPanel panelBotones = new JPanel();
@@ -89,17 +134,25 @@ private Ventana ventana;
 			public void mouseClicked(MouseEvent e) {
 				
 				try {
-					ArrayList<Museo> museos = DAO.museosPorCiudad(v.getDestinoSeleccionado().getNombre());
-				
+					
+					lblSeccion.setText("Museos");
+					
+					//VACIAMOS EL ARRAYLIST 
+					servicios.clear();
+					
+					//CARGAMOS INFORMACIÓN DE BBDD EN EL ARRAYLIST
+					servicios = DAO.museosPorCiudad(v.getDestinoSeleccionado().getNombre());
 					
 					
 					
 					
 					DefaultListModel<String> model = new DefaultListModel<String>();
 					
-					for(int i=0; i<museos.size(); i++) {
+					for(int i=0; i<servicios.size(); i++) {
 						
-						Museo museo = museos.get(i);
+						
+						//CREAMOS UN OBJETO DEL TIPO QUE SEA UTILIZANDO EL POLIMORFISMO
+						Museo museo = (Museo)servicios.get(i);
 						String tab = "&emsp;&emsp;";
 						String br = "<br>";
 						
@@ -140,15 +193,20 @@ private Ventana ventana;
 				
 				try {
 					
+					lblSeccion.setText("Centros");
 					
-					ArrayList<CentroComercial> centrosComerciales = DAO.centroComercialPorCiudad(v.getDestinoSeleccionado().getNombre());
+					//VACIAMOS EL ARRAYLIST 
+					servicios.clear();
+					
+					//CARGAMOS INFORMACIÓN DE BBDD EN EL ARRAYLIST
+					servicios = DAO.centroComercialPorCiudad(v.getDestinoSeleccionado().getNombre());
 					
 					
 					DefaultListModel<String> model = new DefaultListModel<String>();
 					
-					for(int i=0; i<centrosComerciales.size(); i++) {
+					for(int i=0; i<servicios.size(); i++) {
 						
-						CentroComercial centro = centrosComerciales.get(i);
+						CentroComercial centro = (CentroComercial) servicios.get(i);
 						String tab = "&emsp;&emsp;";
 						String br = "<br>";
 						
@@ -187,21 +245,21 @@ private Ventana ventana;
 				
 				try {
 					
-					
-					ArrayList<Restaurante> restaurantes = DAO.RestaurantePorCiudad(v.getDestinoSeleccionado().getNombre());
+					lblSeccion.setText("Restaurantes");
+					 servicios = DAO.RestaurantePorCiudad(v.getDestinoSeleccionado().getNombre());
 					
 					
 					DefaultListModel<String> model = new DefaultListModel<String>();
 					
-					for(int i=0; i<restaurantes.size(); i++) {
+					for(int i=0; i<servicios.size(); i++) {
 						
-						Restaurante restaurante = restaurantes.get(i);
+						Restaurante restaurante = (Restaurante) servicios.get(i);
 						String tab = "&emsp;&emsp;";
 						String br = "<br>";
 						
 						String info = "<html><h1>"+restaurante.getNombre()+"</h1>"
 						+tab+"Direccion - "+restaurante.getDireccion()+br+
-						tab+"Horario - "+restaurante.getHorario()+"</html>";
+						tab+"Horario - "+restaurante.getHorario()+tab+"RangoPrecio - "+restaurante.getRangoPrecio()+"</html>";
 						
 						/*System.out.println(info);
 						JLabel labelMuseo = new JLabel(info);
@@ -228,14 +286,51 @@ private Ventana ventana;
 		panelBotones.add(btnRestaurantes);
 		
 		
-		
 		JButton btnEvento = new JButton("Eventos");
+		btnEvento.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				try {
+					
+					lblSeccion.setText("Eventos");
+					 servicios = DAO.eventoPorCiudad(v.getDestinoSeleccionado().getNombre());
+					
+					
+					DefaultListModel<String> model = new DefaultListModel<String>();
+					
+					for(int i=0; i<servicios.size(); i++) {
+						
+						Evento evento = (Evento) servicios.get(i);
+						String tab = "&emsp;&emsp;";
+						String br = "<br>";
+						
+						String info = "<html><h1>"+evento.getNombre()+"</h1>"
+						+tab+"Direccion - "+evento.getDireccion()+br+
+						tab+"Horario - "+evento.getHorario()+tab+"p - "+((Evento) evento).getPrecio()+"</html>";
+						
+						/*System.out.println(info);
+						JLabel labelMuseo = new JLabel(info);
+						labelMuseo.setHorizontalTextPosition(JLabel.CENTER);
+						labelMuseo.setVerticalTextPosition(JLabel.BOTTOM);
+						panelContenido.add(labelMuseo);*/
+						
+						
+						 model.addElement(info);
+					}
+					list.setModel(model);
+					
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ConexionFallidaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		panelBotones.add(btnEvento);
 		
-		
-		//Esta por concretar
-		JButton btnTours = new JButton("Tours");
-		panelBotones.add(btnTours);
 		
 	}
 	

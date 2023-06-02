@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import clases.CentroComercial;
 import clases.Destino;
+import clases.Evento;
 import clases.Hotel;
 import clases.Museo;
 import clases.Restaurante;
+import clases.Servicio;
 import enums.TipoMuseo;
 import excepciones.ConexionFallidaException;
 
@@ -49,14 +51,14 @@ public class DAO {
 	
 	
 	
-	public static ArrayList<Museo> museosPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+	public static ArrayList<Servicio> museosPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
 		
 		conexion = DataBaseConnector.getConnection();
 		
 		Statement stmt = conexion.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM museo WHERE ciudad = '"+ciudad+"'");
         
-        ArrayList<Museo> museos = new ArrayList<Museo>();
+        ArrayList<Servicio> museos = new ArrayList<Servicio>();
         
         
         while ( rs.next() ) {
@@ -106,7 +108,7 @@ public class DAO {
 	
 	/*POR REVISAR*/
 	
-	public static ArrayList<Hotel> hotelesPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+	/*public static ArrayList<Hotel> hotelesPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
 		
 		conexion = DataBaseConnector.getConnection();
 		
@@ -139,18 +141,18 @@ public class DAO {
 		return hoteles;
 		
 		
-	}
+	}*/
 	
 	
 	
-	public static ArrayList<CentroComercial> centroComercialPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+	public static ArrayList<Servicio> centroComercialPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
 		
 		conexion = DataBaseConnector.getConnection();
 		
 		Statement stmt = conexion.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM centro_comercial WHERE ciudad = '"+ciudad+"'");
         
-        ArrayList<CentroComercial> centrosComerciales = new ArrayList<CentroComercial>();
+        ArrayList<Servicio> centrosComerciales = new ArrayList<Servicio>();
         
         
         while ( rs.next() ) {
@@ -182,14 +184,14 @@ public class DAO {
 	}
 	
 	
-public static ArrayList<Restaurante> RestaurantePorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+public static ArrayList<Servicio> RestaurantePorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
 		
 		conexion = DataBaseConnector.getConnection();
 		
 		Statement stmt = conexion.createStatement();
         ResultSet rs = stmt.executeQuery("SELECT * FROM restaurante WHERE ciudad = '"+ciudad+"'");
         
-        ArrayList<Restaurante> restaurantes = new ArrayList<Restaurante>();
+        ArrayList<Servicio> restaurantes = new ArrayList<Servicio>();
         
         
         while ( rs.next() ) {
@@ -216,6 +218,49 @@ public static ArrayList<Restaurante> RestaurantePorCiudad(String ciudad) throws 
 		
 	
 	}
+
+public static ArrayList<Servicio> eventoPorCiudad(String ciudad) throws SQLException, ConexionFallidaException{
+	
+	conexion = DataBaseConnector.getConnection();
+	
+	Statement stmt = conexion.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT * FROM evento WHERE ciudad = '"+ciudad+"'");
+    
+    ArrayList<Servicio> eventos = new ArrayList<Servicio>();
+    
+
+    
+    while ( rs.next() ) {
+        int id = rs.getInt("id");
+        String nombre= rs.getString("nombre");
+        String descripcion = rs.getString("descripcion");
+        String fecha= rs.getString("fecha");
+        int precio = rs.getInt("precio");
+        String hora = rs.getString("hora");
+        String direccion = rs.getString("direccion");
+        String url = rs.getString("url");
+        String artista=rs.getString("artista");
+       
+  
+    
+        
+        
+        
+        
+        Evento evento= new Evento(nombre, id, descripcion, url, direccion, ciudad, hora,1,artista,ciudad);
+        eventos.add(evento);
+        
+        
+    }
+    
+    conexion.close();
+	
+	return eventos;
+	
+	
+}
+
+
 	
 	
 	

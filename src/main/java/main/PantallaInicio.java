@@ -47,15 +47,13 @@ private Ventana ventana;
 			
 			
 			
-			
-	
-
 			// Añade la imagen al panel
 
 			ImageIcon icon = new ImageIcon("src\\main\\java\\recursos\\Destinos\\Logo.jpg");
 			Image image = icon.getImage(); // transformarlo
 
 			JLabel label = new JLabel() {
+				//Para que se ajuste a la pantallla y la coloque correctamente
 			    @Override
 			    protected void paintComponent(Graphics g) {
 			        super.paintComponent(g);
